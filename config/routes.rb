@@ -10,10 +10,17 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end
   resources :users, only: [:index, :show, :edit, :update]
+  
   resources :groups, except: [:destroy] do
     member do
       get :join
       get :leave
     end
+    
+    resources :groups do
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
   end
+  end
+  
 end
